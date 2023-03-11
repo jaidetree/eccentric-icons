@@ -1,0 +1,25 @@
+{
+  "name": "eccentric-icons",
+  "version": "1.0.0",
+  "description": "A collection of custom icons for various apps",
+  "main": "index.js",
+  "scripts": {
+    "resize": "nbb -m tasks.resize",
+    "convert": "nbb -m tasks.convert-icns"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eccentric-j/doom-icon.git"
+  },
+  "author": "eccentric-j <jayzawrotny@gmail.com>",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/eccentric-j/doom-icon/issues"
+  },
+  "homepage": "https://github.com/eccentric-j/doom-icon#readme",
+  "devDependencies": {
+    "jimp": "^0.22.7",
+    "nbb": "^1.2.169",
+    "zx": "^7.2.0"
+  }
+}

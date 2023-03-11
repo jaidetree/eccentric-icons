@@ -1,0 +1,141 @@
+* Eccentric Icons
+
+A collection of fun custom icons for applications.
+
+** Questions
+
+*** How do I use thesee icon?
+
+- Browse the [[file:./icons][./icons]] directory to see what applications are
+  supported.
+- Pick a flavor of icon
+- Download the appropriate format for your operating system
+
+**** On OS X
+
+- Download the =.icns= file from one of the available icon directories
+- In another tab or window, open the directory containing the target application
+- Right or option-click the =.app= file and select "Get Info"
+- Drag the desired =.icns= file to the icon on the top-left of the "Get Info" window
+
+[[./docs/howto-use-icon.gif]]
+
+Or (Thanks to [[https://github.com/smallwat3r][@smallwat3r]])
+
+#+begin_src bash
+EMACS_APP="/Applications/Emacs.app"
+curl -o /tmp/doom.png https://raw.githubusercontent.com/eccentric-j/doom-icon/master/icons/doom-emacs/cute-doom/doom.png &&
+  sips -i /tmp/doom.png >/dev/null &&
+  DeRez -only icns /tmp/doom.png >/tmp/icns.rsrc &&
+  Rez -append /tmp/icns.rsrc -o "$APP"$'/Icon\r' &&
+  SetFile -a C "$APP" &&
+  SetFile -a V "$APP"$'/Icon\r'
+#+end_src
+
+**** Linux
+
+(Thanks to [[https://github.com/drchsl][@drchsl]])
+
+#+begin_src bash
+ICON="$HOME/.local/share/icons/doom.png"
+DESKTOP_FILE=/usr/local/share/applications/emacs.desktop
+wget https://raw.githubusercontent.com/eccentric-j/doom-icon/master/icons/doom-emacs/cute-doom/doom.png -O "$ICON" &&
+sudo --preserve-env=ICON,DESKTOP_FILE sed -i "s|Icon=.*|Icon=$ICON|" $DESKTOP_FILE
+#+end_src
+
+
+**** Windows
+
+(Thanks to [[https://github.com/elken][@elken]])
+
+- Download the =.ico= file from one of the available icon directories
+- Keep the containing directory open
+- Download [[http://angusj.com/resourcehacker/#download][Resource Hacker]]
+- Save in a useful place
+
+Repeat the below section for any related =*.exe= files.
+
+***** Replace icon for exe
+
+- Locate your emacs install directory (depends on if it has been installer with `choco` or the official installer)
+- Open Resource Hacker
+- Drag the exe into the window
+- Left click on "Icon" on the left tree
+- Right click -> Replace icon
+- Locate the ICO file from before
+- Replace
+- Save
+
+*** Want feedback?
+
+Yes please! I love design-focused feedback. For example, "Can you change x so that y
+because z?" is much more helpful to me than "x hurts my eyes".
+
+*** Since you shared the sources would you be open to PRs with improvements?
+
+Very yes!
+
+*** Can I contribute icons to this project?
+Definitely! Alternatives are welcome. Please note, there are some requirements:
+
+- a source image png that is at a minimum 1024x1024 pixels in size
+- create a =./icons/{app}/{flavor}/src= directory, consistently will help automate this
+  later
+- the app refers to a kabob-case application name, just needs to be human
+  readable
+- the flavor refers to a simple way to describe the icon like =3d= =cute=
+  =abject=. This way we can have multiple alternatives per app.
+
+Then I'll change this readme by adding a table mapping the icon path to the
+author. We'll cross that bridge when we get there.
+
+*** Could the png, .icns, and .ico be generated automatically from a gh action?
+
+Yes! Working on some scripts to automate the process entirely. The plan is to
+support PRs that just add the original src pngs, optionally specifing some size
+overrides if different images should be used at smaller sizes, and then the
+tooling will use that to generate all the desired formats. A rough draft of the
+scripts exists but currently only supports a single image to iconset to icns.
+
+*** What if I'm seeing an icon and I hate it. I even kinda hate you a little bit for even making it?
+
+That's pretty brutal comrade. But if you feel that way, it is what it is.
+
+*** Do you feel you're maybe overthinking this?
+
+Yes! Yes I probably am.
+
+** Special Thanks
+
+People who have inspired or contributed to this project
+
+- @drchsl
+- @elken
+- @shankar2k
+- @tecosaur
+
+** Development
+
+Install node dependencies. The scripts are written in node-babashka
+ClojureScript as that's my favorite language and runtime combo at the moment.
+
+#+begin_src bash
+npm install
+#+end_src
+
+Convert an image to an iconset:
+
+#+begin_src bash
+cd icons/kitty-terminal/3d
+npm run resize ./src/kitty-icon.png kitty-terminal
+#+end_src
+
+Convert the iconset to an icns file:
+
+#+begin_src bash
+cd icons/kitty-terminal/3d
+npm run resize ./kitty-terminal.iconset
+#+end_src
+
+Just keep in mind these scripts are subject to change soon to support size
+overrides and more formats for more operating systems.
