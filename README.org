@@ -101,6 +101,12 @@ scripts exists but currently only supports a single image to iconset to icns.
 
 That's pretty brutal comrade. But if you feel that way, it is what it is.
 
+*** Can I request an icon?
+
+You may request an icon via creating an issue. However, getting one done depends
+on my available time, workload, the accessibility of the app, and the style of
+icon.
+
 *** Do you feel you're maybe overthinking this?
 
 Yes! Yes I probably am.
